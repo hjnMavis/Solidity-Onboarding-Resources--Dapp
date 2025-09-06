@@ -30,7 +30,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "localhost",
+  defaultNetwork: "creditcoinTestnet",
   namedAccounts: {
     deployer: {
       // By default, it will take the first Hardhat account as the deployer
@@ -117,6 +117,11 @@ const config: HardhatUserConfig = {
     pgnTestnet: {
       url: "https://sepolia.publicgoods.network",
       accounts: [deployerPrivateKey],
+    },
+    creditcoinTestnet: {
+      url: "https://rpc.cc3-testnet.creditcoin.network",
+      accounts: [deployerPrivateKey],
+      chainId: 102031,
     },
   },
   // configuration for harhdat-verify plugin

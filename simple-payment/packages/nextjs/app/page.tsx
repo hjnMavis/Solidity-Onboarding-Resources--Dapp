@@ -90,7 +90,7 @@ const Home: NextPage = () => {
             <button
               className="mt-10 mb-2 text-xl rounded-xl border-4 p-2 cursor-pointer"
               onClick={handleBuyCoffee}
-            >Send Message with Tips (0.001 ETH)</button>
+            >Send Message with Tips (0.001 tCTC)</button>
           </div>
 
           <div className="h-[100%] border-4 m-4"></div>
