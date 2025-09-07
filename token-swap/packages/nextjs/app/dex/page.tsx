@@ -13,8 +13,8 @@ const NUMBER_REGEX = /^\.?\d+\.?\d*$/;
 
 const Dex: NextPage = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [ethToTokenAmount, setEthToTokenAmount] = useState("");
-  const [tokenToETHAmount, setTokenToETHAmount] = useState("");
+  const [ctcToTokenAmount, setCtcToTokenAmount] = useState("");
+  const [tokenToCTCAmount, setTokenToCTCAmount] = useState("");
   const [depositAmount, setDepositAmount] = useState("");
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [approveSpender, setApproveSpender] = useState("");
@@ -70,7 +70,7 @@ const Dex: NextPage = () => {
     args: [connectedAccount],
   });
 
-  const { data: contractETHBalance } = useWatchBalance({ address: DEXInfo?.address });
+  const { data: contractCTCBalance } = useWatchBalance({ address: DEXInfo?.address });
 
   return (
     <>
@@ -105,14 +105,14 @@ const Dex: NextPage = () => {
             <div className="py-3 px-4">
               <div className="flex mb-4 justify-center items-center">
                 <span className="w-1/2">
-                  ethToToken{" "}
+                  ctcToToken{" "}
                   <EtherInput
-                    value={ethToTokenAmount}
+                    value={ctcToTokenAmount}
                     onChange={value => {
-                      setTokenToETHAmount("");
-                      setEthToTokenAmount(value);
+                      setTokenToCTCAmount("");
+                      setCtcToTokenAmount(value);
                     }}
-                    name="ethToToken"
+                    name="ctcToToken"
                   />
                 </span>
                 <button
@@ -121,10 +121,11 @@ const Dex: NextPage = () => {
                     try {
                       await writeDexContractAsync({
                         functionName: "ethToToken",
-                        value: NUMBER_REGEX.test(ethToTokenAmount) ? parseEther(ethToTokenAmount) : 0n,
+                        value: NUMBER_REGEX.test(ctcToTokenAmount) ? parseEther(ctcToTokenAmount) : 0n,
+                        gas: 200000n, // 명시적 가스 한도 설정
                       });
                     } catch (err) {
-                      console.error("Error calling ethToToken function");
+                      console.error("Error calling ethToToken function:", err);
                     }
                   }}
                 >
@@ -133,14 +134,14 @@ const Dex: NextPage = () => {
               </div>
               <div className="flex justify-center items-center">
                 <span className="w-1/2">
-                  tokenToETH{" "}
+                  tokenToCTC{" "}
                   <IntegerInput
-                    value={tokenToETHAmount}
+                    value={tokenToCTCAmount}
                     onChange={value => {
-                      setEthToTokenAmount("");
-                      setTokenToETHAmount(value.toString());
+                      setCtcToTokenAmount("");
+                      setTokenToCTCAmount(value.toString());
                     }}
-                    name="tokenToETH"
+                    name="tokenToCTC"
                     disableMultiplyBy1e18
                   />
                 </span>
@@ -151,7 +152,7 @@ const Dex: NextPage = () => {
                       await writeDexContractAsync({
                         functionName: "tokenToEth",
                         // @ts-expect-error - Show error on frontend while sending, if user types invalid number
-                        args: [NUMBER_REGEX.test(tokenToETHAmount) ? parseEther(tokenToETHAmount) : tokenToETHAmount],
+                        args: [NUMBER_REGEX.test(tokenToCTCAmount) ? parseEther(tokenToCTCAmount) : tokenToCTCAmount],
                       });
                     } catch (err) {
                       console.error("Error calling tokenToEth function");
@@ -278,9 +279,9 @@ const Dex: NextPage = () => {
 
         <div className="mx-auto p-8 m-8 md:sticky md:top-0">
           <Curve
-            addingEth={ethToTokenAmount !== "" ? parseFloat(ethToTokenAmount.toString()) : 0}
-            addingToken={tokenToETHAmount !== "" ? parseFloat(tokenToETHAmount.toString()) : 0}
-            ethReserve={parseFloat(formatEther(contractETHBalance?.value || 0n))}
+            addingEth={ctcToTokenAmount !== "" ? parseFloat(ctcToTokenAmount.toString()) : 0}
+            addingToken={tokenToCTCAmount !== "" ? parseFloat(tokenToCTCAmount.toString()) : 0}
+            ethReserve={parseFloat(formatEther(contractCTCBalance?.value || 0n))}
             tokenReserve={parseFloat(formatEther(contractBalance || 0n))}
             width={500}
             height={500}

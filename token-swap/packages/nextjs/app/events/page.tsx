@@ -9,25 +9,25 @@ const Events: NextPage = () => {
   const { data: EthToTokenEvents, isLoading: isEthToTokenEventsLoading } = useScaffoldEventHistory({
     contractName: "DEX",
     eventName: "EthToTokenSwap",
-    fromBlock: 0n,
+    fromBlock: 3347265n,
   });
 
   const { data: tokenToEthEvents, isLoading: isTokenToEthEventsLoading } = useScaffoldEventHistory({
     contractName: "DEX",
     eventName: "TokenToEthSwap",
-    fromBlock: 0n,
+    fromBlock: 3347265n,
   });
 
   const { data: liquidityProvidedEvents, isLoading: isLiquidityProvidedEventsLoading } = useScaffoldEventHistory({
     contractName: "DEX",
     eventName: "LiquidityProvided",
-    fromBlock: 0n,
+    fromBlock: 3347265n,
   });
 
   const { data: liquidityRemovedEvents, isLoading: isLiquidityRemovedEventsLoading } = useScaffoldEventHistory({
     contractName: "DEX",
     eventName: "LiquidityRemoved",
-    fromBlock: 0n,
+    fromBlock: 3347265n,
   });
 
   return (
@@ -40,14 +40,14 @@ const Events: NextPage = () => {
         ) : (
           <div>
             <div className="text-center mb-4">
-              <span className="block text-2xl font-bold">ETH To Balloons Events</span>
+              <span className="block text-2xl font-bold">CTC To Balloons Events</span>
             </div>
             <div className="overflow-x-auto shadow-lg">
               <table className="table table-zebra w-full">
                 <thead>
                   <tr>
                     <th className="bg-primary">Address</th>
-                    <th className="bg-primary">Amount of ETH in</th>
+                    <th className="bg-primary">Amount of CTC in</th>
                     <th className="bg-primary">Amount of Balloons out</th>
                   </tr>
                 </thead>
@@ -84,7 +84,7 @@ const Events: NextPage = () => {
         ) : (
           <div className="mt-8">
             <div className="text-center mb-4">
-              <span className="block text-2xl font-bold">Balloons To ETH Events</span>
+              <span className="block text-2xl font-bold">Balloons To CTC Events</span>
             </div>
             <div className="overflow-x-auto shadow-lg">
               <table className="table table-zebra w-full">
@@ -92,7 +92,7 @@ const Events: NextPage = () => {
                   <tr>
                     <th className="bg-primary">Address</th>
                     <th className="bg-primary">Amount of Balloons In</th>
-                    <th className="bg-primary">Amount of ETH Out</th>
+                    <th className="bg-primary">Amount of CTC Out</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -135,9 +135,9 @@ const Events: NextPage = () => {
                 <thead>
                   <tr>
                     <th className="bg-primary">Address</th>
-                    <th className="bg-primary">Amount of ETH In</th>
+                    <th className="bg-primary">Amount of CTC In</th>
                     <th className="bg-primary">Amount of Balloons In</th>
-                    <th className="bg-primary">Lİquidity Minted</th>
+                    <th className="bg-primary">Liquidity Minted</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -181,7 +181,7 @@ const Events: NextPage = () => {
                 <thead>
                   <tr>
                     <th className="bg-primary">Address</th>
-                    <th className="bg-primary">Amount of ETH Out</th>
+                    <th className="bg-primary">Amount of CTC Out</th>
                     <th className="bg-primary">Amount of Balloons Out</th>
                     <th className="bg-primary">Liquidity Withdrawn</th>
                   </tr>

@@ -118,7 +118,7 @@ export const Curve: FC<ICurveProps> = (props: ICurveProps) => {
 
         ctx.fillStyle = "#000000";
         ctx.fillText(
-          "" + props.addingEth + " ETH input",
+          "" + props.addingEth + " CTC input",
           plotX(props.ethReserve) + textSize,
           plotY(props.tokenReserve) - textSize,
         );
@@ -171,7 +171,7 @@ export const Curve: FC<ICurveProps> = (props: ICurveProps) => {
         //console.log("amountGained",amountGained)
         ctx.fillStyle = "#000000";
         ctx.fillText(
-          "" + amountGained + " ETH output (-0.3% fee)",
+          "" + amountGained + " CTC output (-0.3% fee)",
           plotX(k / newTokenReserve) + textSize,
           plotY(newTokenReserve) - textSize,
         );
@@ -187,7 +187,7 @@ export const Curve: FC<ICurveProps> = (props: ICurveProps) => {
   return (
     <div style={{ position: "relative", width: props.width, height: props.height }}>
       <canvas style={{ position: "absolute", left: 0, top: 0 }} ref={ref} width={props.width} height={props.height} />
-      <div style={{ position: "absolute", left: "20%", bottom: -20 }}>-- ETH Reserve --{">"}</div>
+      <div style={{ position: "absolute", left: "20%", bottom: -20 }}>-- CTC Reserve --{">"}</div>
       <div
         style={{ position: "absolute", left: -20, bottom: "20%", transform: "rotate(-90deg)", transformOrigin: "0 0" }}
       >
